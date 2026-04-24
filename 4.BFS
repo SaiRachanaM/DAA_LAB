@@ -1,0 +1,42 @@
+import java.util.*;
+
+public class BFSDigraph{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("enter number of vertices: ");
+		int vertices = sc.nextInt();
+		int[][] adjacencyMatrix = new int[vertices][vertices];
+		
+		System.out.println("enter the adjacency matrix ");
+		for(int i = 0; i < vertices; i++) {
+			for(int j = 0; j < vertices; j++) {
+				adjacencyMatrix[i][j] = sc.nextInt();
+			}
+		}
+		System.out.println("enter starting vertex ");
+		int startingVertex = sc.nextInt();
+		bfs(adjacencyMatrix, startingVertex, vertices );
+		sc.close();
+	}
+	
+	public static void bfs(int[][] adjacencyMatrix, int startingVertex, int vertices) {
+		boolean[] visited = new boolean[vertices];
+		
+		
+		Queue<Integer> queue = new LinkedList<>();
+		visited[startingVertex] = true;
+		
+		queue.add(startingVertex);
+		while(!queue.isEmpty()) {
+			int currentVertex = queue.poll();
+			System.out.print(currentVertex+ " ");
+			for(int i = 0; i < vertices; i++) {
+				if(adjacencyMatrix[currentVertex][i] == 1 && visited[i] != true) {
+					visited[i] = true;
+					queue.add(i);
+					
+				}
+			}
+		}
+	}
+}
